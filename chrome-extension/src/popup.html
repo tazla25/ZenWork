@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZenWork</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="brand">
+      <span class="logo-icon">🧘</span>
+      <span class="logo-text">Zen<span>Work</span></span>
+    </div>
+    <a href="http://localhost:3000/dashboard" target="_blank" class="dashboard-link" id="open-dashboard">Dashboard ↗</a>
+  </header>
+
+  <!-- Container -->
+  <main class="container">
+    <!-- Today's Score -->
+    <section class="score-section">
+      <div class="score-radial">
+        <svg viewBox="0 0 36 36" class="circular-chart blue">
+          <path class="circle-bg"
+            d="M18 2.0845
+              a 15.9155 15.9155 0 0 1 0 31.831
+              a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <path class="circle" id="score-circle"
+            stroke-dasharray="0, 100"
+            d="M18 2.0845
+              a 15.9155 15.9155 0 0 1 0 31.831
+              a 15.9155 15.9155 0 0 1 0 -31.831"
+          />
+          <text x="18" y="20.35" class="percentage" id="score-text">0</text>
+        </svg>
+      </div>
+      <div class="score-label">Today's Focus Score</div>
+    </section>
+
+    <!-- Productivity Bar -->
+    <section class="stats-bar-section">
+      <div class="progress-track">
+        <div class="progress-fill productive" id="bar-productive" style="width: 0%"></div>
+        <div class="progress-fill neutral" id="bar-neutral" style="width: 0%"></div>
+        <div class="progress-fill distracting" id="bar-distracting" style="width: 0%"></div>
+      </div>
+      <div class="legend">
+        <span class="legend-item"><i class="dot productive"></i> Productive: <span id="txt-productive">0m</span></span>
+        <span class="legend-item"><i class="dot neutral"></i> Neutral: <span id="txt-neutral">0m</span></span>
+        <span class="legend-item"><i class="dot distracting"></i> Distracting: <span id="txt-distracting">0m</span></span>
+      </div>
+    </section>
+
+    <!-- Focus Session Section -->
+    <section class="focus-section">
+      <h3>🎯 Focus Session</h3>
+      
+      <!-- Timer Config -->
+      <div id="focus-setup" class="focus-controls">
+        <div class="preset-buttons">
+          <button class="preset-btn active" data-duration="25">25m</button>
+          <button class="preset-btn" data-duration="50">50m</button>
+          <button class="preset-btn" data-duration="90">90m</button>
+        </div>
+        <button id="start-btn" class="action-btn primary">Start Focus</button>
+      </div>
+
+      <!-- Active Timer -->
+      <div id="focus-running" class="focus-timer hidden">
+        <div class="timer-display" id="timer-display">25:00</div>
+        <button id="stop-btn" class="action-btn danger">Give Up</button>
+      </div>
+    </section>
+
+    <!-- Top Domains -->
+    <section class="domains-section">
+      <h3>📈 Top Visited Sites</h3>
+      <ul class="domain-list" id="domain-list">
+        <li class="empty-state">No sites tracked yet today.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="popup.js"></script>
+</body>
+</html>
