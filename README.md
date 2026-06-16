@@ -78,3 +78,4 @@ zenwork-app/
    - Click **Load unpacked** and select the `chrome-extension/` directory.
 3. Open the extension popup, go to settings, and set the server URL to your live Vercel domain (e.g., `https://your-project.vercel.app`).
 4. Logging into your Vercel website will automatically sync your session token to the extension!
+
