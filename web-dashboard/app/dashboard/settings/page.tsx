@@ -57,7 +57,7 @@ export default function SettingsPage() {
 
     const { data } = await supabase
       .from('users')
-      .select('work_hours, preferences')
+      .select('work_hours, work_days, preferences')
       .eq('id', user.id)
       .single()
 

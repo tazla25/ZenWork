@@ -4,8 +4,8 @@
 import Razorpay from 'razorpay';
 
 const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET,
+  key_id: process.env.RAZORPAY_KEY_ID as string,
+  key_secret: process.env.RAZORPAY_KEY_SECRET as string,
 });
 
 // Plan IDs (create these in Razorpay Dashboard first):
@@ -21,13 +21,20 @@ export async function createSubscription({
   userName,
   totalCount = 12,
   quantity = 1
+}: {
+  planId: string;
+  userId: string;
+  userEmail: string;
+  userName: string;
+  totalCount?: number;
+  quantity?: number;
 }) {
   try {
     const subscription = await razorpay.subscriptions.create({
       plan_id: planId,
       total_count: totalCount,
       quantity: quantity,
-      customer_notify: true,
+      customer_notify: 1,
       notes: {
         user_id: userId,
         product: 'zenwork'
@@ -39,7 +46,7 @@ export async function createSubscription({
       subscriptionId: subscription.id,
       shortUrl: subscription.short_url
     };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Subscription creation failed:', error);
     return { success: false, error: error.message };
   }
@@ -51,6 +58,10 @@ export function verifyPaymentSignature({
   razorpayPaymentId,
   razorpaySubscriptionId,
   razorpaySignature
+}: {
+  razorpayPaymentId: string;
+  razorpaySubscriptionId: string;
+  razorpaySignature: string;
 }) {
   const generatedSignature = crypto
     .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET!)
